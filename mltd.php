@@ -15,29 +15,43 @@
     </div>
   </nav>
 
-  <h3 class="header center"> MiriTools Alpha 2 </h3>
+  <h3 class="header center"> MiriTools Alpha 3 </h3>
   <div class="center">
     Collection of Mirishita-related tools and Information. <br>
     Made by @seiren_seirent
-
   </div>
+  <?php
+  $event = json_decode(file_get_contents("https://api.matsurihi.me/mltd/v1/events"),true);
+
+   ?>
   <h3 class="header center"> Event Information </h3>
   <div class="row">
-    <div class="col l6 m6 xl6 s12 ">
+    <div class="col l6 m6 s12 ">
       <h5 class="header center">Current Event</h5>
-  </div>
-    <div class="col l6 ">
+
+        <div class="card grey">
+          <div class="card-content white-text">
+            <span class="card-title"> Coming Soon </span>
+
+          </div>
+        </div>
+      </div>
+    <div class="col l6 m6 s12 ">
       <h5 class="header center">Rankings</h5>
+      <div class="card blue">
+        <div class="card-content white-text">
+          <span class="card-title"> Coming Soon </span>
+        </div>
+      </div>
     </div>
   </div>
-  <br><br>
   <h3 class="header center"> Version Info </h3>
   <?php $url = "https://api.matsurihi.me/mltd/v1/version/latest";
         $verdat = json_decode(file_get_contents($url),true);
    ?>
    <div class="row">
     <div class="col s12 m6 l6">
-      <div class="card teal">
+      <div class="card orange">
         <div class="card-content white-text">
           <span class="card-title"> App Information </span>
           Current Version : <?php echo $verdat['app']['version']; ?> <br>
@@ -45,10 +59,8 @@
         </div>
       </div>
     </div>
-
-
       <div class="col s12 m6 l6">
-        <div class="card teal">
+        <div class="card green">
           <div class="card-content white-text">
             <span class="card-title"> Resource Information </span>
             Current Version : <?php echo $verdat['res']['version']; ?> <br>
@@ -75,14 +87,13 @@
           </div>
         </div>
         <div class="card-action">
-          <button class="btn waves-effect waves-light" type="submit" name="action">Submit
-            <i class="material-icons right">send</i>
+          <button class="waves-effect waves-teal btn-flat" type="submit" name="action">Search
           </button>
         </div>
       </div>
     </div>
   </form>
-  <form method="post" action="lounge.php">
+  <form method="post" action="loungeSearch.php">
     <div class="col s12 m6 l6">
       <div class="card white">
         <div class="card-content black-text">
@@ -91,13 +102,12 @@
             Example : シアターでガチャ引く <br> </p>
             <br>
           <div class="input-field">
-            <input type="text" name="loungeKeyword" size="40">
-            <label for="loungeKeyword">Lounge Keyword</label>
+            <input type="text" name="loungeSearch">
+            <label for="loungeSearch">Lounge Keyword</label>
           </div>
         </div>
         <div class="card-action">
-          <button class="btn waves-effect waves-light" type="submit" name="action">Submit
-            <i class="material-icons right">send</i>
+          <button class="waves-effect waves-teal btn-flat" type="submit" name="action">Search
           </button>
         </div>
       </div>
@@ -127,5 +137,6 @@
             </div>
 
           </footer>
+  <?php echo error_get_last() ?>
   </body>
 </html>

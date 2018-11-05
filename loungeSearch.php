@@ -16,36 +16,22 @@
 </nav>
 <?php
   header('Content-type: text/html; charset=utf-8');
-  $loungeID = $_POST['loungeID'];
-  $url = "https://api.matsurihi.me/mltd/v1/lounges/$loungeID";
+  $query = $_POST['loungeSearch'];
+  $url = "https://api.matsurihi.me/mltd/v1/lounges/search?name=$query";
   $data = json_decode(file_get_contents($url),true);
-  $history = json_decode(file_get_contents("https://api.matsurihi.me/mltd/v1/lounges/$loungeID/eventHistory"),true)
- ?>
-<h3 class="header center"> Result </h3>
-      <ul class="collection with-header">
-        <li class="collection-header"><h4>Lounge <?php echo $data['viewerId'] ?></h4></li>
-        <li class="collection-item">Name: <?php echo $data['name']?></li>
-        <li class="collection-item">Comment: <?php echo $data['comment']?></li>
-        <li class="collection-item">Owner: <?php echo $data['masterName']?></li>
-        <li class="collection-item">Members: <?php echo $data['userCount'],"/",$data['userCountLimit']?></li>
-        <li class="collection-item">Fans: <?php echo $data['fan']?></li>
-      </ul>
-
-
-<h3 class="header center"> Event Rankings </h3>
-<br>
+  ?>
+<h3 class="header center"> Search Results </h3>
 <div class="row">
-<?php foreach($history as $val) {
+<?php foreach($data as $val) {
   echo
     '
       <div class="col s12 m6 l6">
         <div class="card purple">
           <div class="card-content white-text">
-          <span class="card-title yellow-text">' , $val['eventName'] ,'</span>
+          <span class="card-title yellow-text">' , $val['name'] ,'</span>
             <p>
-            Rank: ',$val['rank'],'<br>
-            Score: ',$val['score'],'<br>
-            Date: ',date("d M, Y h:i",strtotime(date($val['summaryTime']))),'</li>
+            ID: ',$val['viewerId'],'<br>
+            Date: ',date("d M, Y h:i",strtotime(date($val['updateTime']))),'</li>
 
             </p>
           </div>
