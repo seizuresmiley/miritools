@@ -82,7 +82,7 @@
       </div>
     </div>
   </div>
-
+<h3 class="header center"> Version Information </h3>
   <?php $url = "https://api.matsurihi.me/mltd/v1/version/latest";
         $verdat = json_decode(file_get_contents($url),true);
    ?>
